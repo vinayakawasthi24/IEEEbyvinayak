@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>IEEE WEBSITE</title>
+  
+ <!-- Styles -->
+
+  <style>
+
+
+/* ---------- Variables ---------- */
+:root {
+  --accent: #9b6bff;
+  --neon-cyan: #2ef0ff;
+  --muted: #b0b0b0;
+  --bg: #0b0f14;
+  --card-bg: rgba(255,255,255,0.05);
+  --radius: 14px;
+}
+
+/* ---------- Global Styles ---------- */
+body {
+  margin: 0;
+  font-family: "Rubik", sans-serif;
+  background: var(--bg);
+  color: #fff;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+#bgCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Behind everything */
+}
+
+/* ---------- Header ---------- */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 6%;
+  position: sticky;
+  top: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+  z-index: 1000;
+}
+
+.navlink, .cta-small {
+  margin-left: 20px;
+  text-decoration: none;
+  font-weight: 600;
+  color: #fff;
+  transition: 0.3s;
+}
+
+.navlink:hover {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 8px var(--neon-cyan);
+}
+
+.cta-small {
+  padding: 8px 16px;
+  border: 1px solid var(--neon-cyan);
+  border-radius: 6px;
+  color: var(--neon-cyan);
+}
+
+/* ---------- Hero Section ---------- */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 100px 6%;
+  gap: 40px;
+  align-items: center;
+}
+
+.hero-title {
+  font-size: 3rem;
+  margin: 0 0 12px;
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.sub {
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+.cta-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background: var(--neon-cyan);
+  color: #000;
+  padding: 12px 20px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 0 12px var(--neon-cyan);
+}
+
+.btn-ghost {
+  border: 1px solid var(--neon-cyan);
+  color: var(--neon-cyan);
+  padding: 12px 20px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn-ghost:hover {
+  background: var(--neon-cyan);
+  color: #000;
+}
+
+/* ---------- Neon Card ---------- */
+.neon-card {
+  position: relative;
+  padding: 20px;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.neon-card .glow {
+  position: absolute;
+  inset: -20px;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.6;
+}
+
+.neon-card .cyan {
+  background: var(--neon-cyan);
+}
+
+.neon-card .mag {
+  background: var(--accent);
+}
+
+.avatar img {
+  width: 100%;
+  border-radius: var(--radius);
+}
+
+/* ---------- About Section ---------- */
+.section {
+  padding: 80px 6%;
+}
+
+.section.alt {
+  background: rgba(255,255,255,0.02);
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2rem;
+  color: var(--neon-cyan);
+}
+
+.section-sub {
+  text-align: center;
+  color: var(--muted);
+  margin-bottom: 40px;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 28px;
+  align-items: start;
+}
+
+.about-cta {
+  display: flex;
+  gap: 11px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.about-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.stat-card {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: var(--radius);
+  font-size: 1.05rem;
+  text-align: center;
+  box-shadow: 0 0 12px rgba(155, 107, 255, 0.2);
+}
+
+/* ---------- Features Section ---------- */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+.feature-card {
+  background: var(--card-bg);
+  padding: 40px 20px;
+  border-radius: var(--radius);
+  font-size: 1.1rem;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 0 20px rgba(46,240,255,0.1);
+  transition: transform 0.4s, box-shadow 0.4s;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 0 25px var(--neon-cyan);
+}
+
+/* ---------- Footer ---------- */
+footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero-right {
+    margin-top: 30px;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* Body base style */
+body {
+  margin: 0;
+  font-family: "Rubik", sans-serif;
+  background: #0b0f14;
+  color: #fff;
+}
+
+/* Background animated canvas */
+#bgCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+
+/* Sticker container with bluish glow behind the image */
+.sticker-container {
+  position: relative;
+  text-align: center;
+  margin-top: 80px;
+  z-index: 1;
+}
+
+.sticker-container::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 320px;
+  background: rgba(46, 240, 255, 0.3); /* Light bluish glow */
+  border-radius: 50%;
+  filter: blur(50px);
+  z-index: -1;
+}
+
+/* Sticker image styling */
+.sticker {
+  max-width: 300px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Content styling */
+.content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 20px;
+}
+
+
+
+  </style>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700&family=Quicksand:wght@300;400;600&display=swap" rel="stylesheet">
+  
+ 
+  
+</head>
+<body>
+
+<canvas id="bgCanvas"></canvas>
+
+<!-- Header -->
+<header>
+  <div class="brand">
+    <h4 id="logo_container"><img src="img/ieee mb blue.png" alt="IEEE Logo"></h4>
+  </div>
+
+  <nav>
+    <a class="navlink" href="about.html">About</a>
+    <a class="navlink" href="#activities">Activities</a>
+    <a class="navlink" href="#projects">Projects</a>
+    <a class="navlink" href="#features">Features</a>
+    <a class="navlink" href="#contact">Contact</a>
+    <a class="cta-small" href="#join">Join</a>
+  </nav>
+</header>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="eyebrow">IEEE STUDENTS • Future Labs</div>
+    <h1 class="hero-title">
+      <span class="shimmer">Innovating the Future</span><br>
+      <span class="accent">Together</span>
+    </h1>
+    <p class="sub">
+      A hyper-modern community of builders, researchers, and dreamers.  
+      Hands-on labs, hackathons, and the global IEEE ecosystem.
+    </p>
+
+    <div class="cta-row">
+      <a class="btn-primary" href="#join">Join the Wave</a>
+      <a class="btn-ghost" href="#activities">Explore Activities</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="neon-card tilt-wrap" id="tiltCard">
+      <div class="glow cyan"></div>
+      <div class="glow mag"></div>
+      <div class="sticker-container">
+        <img class="sticker" src="IMG/sticker.png" alt="Girl coder illustration" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="section">
+  <div class="about-grid">
+    <div>
+      <h2 class="section-title">About the Branch</h2>
+      <p>
+      The IEEE Student Branch at <strong>UIT RGPV</strong> is a vibrant maker collective where creativity meets cutting-edge technology. We are a passionate community of innovators, engineers, developers, and creators dedicated to prototyping, hacking, publishing, and launching impactful projects. Our mission is to foster hands-on learning, encourage experimentation, and push the boundaries of technological innovation.
+
+We organize and host a wide range of activities, including immersive workshops focused on emerging technologies, AI hackathons (AI jams) that challenge participants to solve real-world problems, embedded systems projects that bridge hardware and software, and collaborative initiatives that span global borders. Whether you are developing IoT solutions, building intelligent robotics, exploring machine learning, or contributing to open-source projects, the IEEE Student Branch offers a supportive and inspiring environment.
+
+By connecting students with industry experts, researchers, and global innovators, we empower our members to learn, collaborate, and grow. Join us to turn your ideas into prototypes, prototypes into products, and passion into real-world solutions. Together, we shape the future of technology — one project at a time
+      </p>
+      <div class="about-cta">
+        <a class="btn-primary" href="#projects">See Projects</a>
+        <a class="btn-ghost" href="#join">Become Member</a>
+      </div>
+    </div>
+    <div class="about-stats">
+      <div class="stat-card"> ⚡ <strong>Founded</strong><br>2012</div>
+      <div class="stat-card">🌍 <strong>Members</strong><br>120+ active</div>
+      <div class="stat-card"> <strong>Chapters</strong><br>AI • IoT • Robotics</div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section id="features" class="section alt">
+  <div class="features-container">
+    <h2 class="section-title">Our Features</h2>
+    <p class="section-sub">Why join IEEE?</p>
+
+    <div class="features-grid">
+      <div class="feature-card floating">⚡ Innovation Labs</div>
+      <div class="feature-card floating">🌍 Global Network</div>
+      <div class="feature-card floating">🚀 Hackathons</div>
+      <div class="feature-card floating">📚 Research Support</div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>© 2025 IEEE Student Branch • All Rights Reserved</p>
+</footer>
+
+<!-- Scripts -->
+
+
+<script>
+// Neon floating effect for features
+document.querySelectorAll(".feature-card").forEach(card => {
+  card.addEventListener("mousemove", e => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty("--x", `${x}px`);
+    card.style.setProperty("--y", `${y}px`);
+  });
+});
+
+// Scroll reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll(".feature-card, .stat-card").forEach(el => {
+  observer.observe(el);
+});
+
+// Background canvas animation (crazy dots)
+const canvas = document.getElementById("bgCanvas");
+const ctx = canvas.getContext("2d");
+let particles = [];
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+for (let i = 0; i < 80; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 3 + 1,
+    dx: (Math.random() - 0.5) * 1.5,
+    dy: (Math.random() - 0.5) * 1.5
+  });
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "rgba(46,240,255,0.7)";
+  particles.forEach(p => {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fill();
+    p.x += p.dx;
+    p.y += p.dy;
+    if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+
+</script>
+
+</body>
+</html>
